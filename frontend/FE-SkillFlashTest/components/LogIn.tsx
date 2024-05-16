@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import {
   SafeAreaView,
   StyleSheet,
@@ -14,6 +15,8 @@ export default function LogIn({ navigation }) {
   async function getUserByUsername() {
     const body = { username, password };
     try {
+      const response = await axios.post("/signup", body);
+
       //get user info from api
       //no error? navigate to home page + user ID
       navigation.navigate("HomePage");
