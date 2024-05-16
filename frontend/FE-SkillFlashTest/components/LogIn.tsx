@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import {
   SafeAreaView,
   StyleSheet,
@@ -10,14 +11,22 @@ import {
 export default function LogIn({ navigation }) {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
-
-  async function getUserByUsername() {
+  console.log(username);
+  async function checkUserExists() {
     const body = { username, password };
     try {
+      const response = await axios.post("localhost:9090/signup", body);
+      console.log(response);
       //get user info from api
       //no error? navigate to home page + user ID
-      navigation.navigate("HomePage");
-    } catch {}
+      if (response) {
+        navigation.navigate("HomePage");
+      } else {
+        console.log("username does not exist");
+      }
+    } catch {
+      console.log("error");
+    }
   }
   return (
     <SafeAreaView style={styles.logInContainer}>
@@ -37,7 +46,7 @@ export default function LogIn({ navigation }) {
         placeholder="password"
         textContentType="password"
       />
-      <Pressable onPress={getUserByUsername}>
+      <Pressable onPress={checkUserExists}>
         <Text style={styles.button}>Log in</Text>
       </Pressable>
     </SafeAreaView>
