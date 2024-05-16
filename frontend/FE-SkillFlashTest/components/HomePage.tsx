@@ -18,7 +18,7 @@ export default function LogIn() {
     } catch {}
   }
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.homeContainer}>
       <Text style={styles.label}>Type a keyword</Text>
       <TextInput
         style={styles.input}
@@ -26,7 +26,6 @@ export default function LogIn() {
         value={keyword}
         placeholder="keyword"
       />
-
       <Pressable onPress={postToAI} style={styles.button}>
         <Text style={styles.button}>Send</Text>
       </Pressable>
@@ -35,6 +34,11 @@ export default function LogIn() {
 }
 
 const styles = StyleSheet.create({
+  homeContainer: {
+    flex: 1,
+    marginTop: 100,
+    alignSelf: "center",
+  },
   input: {
     height: 50,
     margin: 12,
