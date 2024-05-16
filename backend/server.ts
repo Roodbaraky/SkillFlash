@@ -1,12 +1,9 @@
 import express from 'express'
-const app = express()
-const port = 3000
+import { app } from './app.ts'
 
-app.get('/', (req: express.Request, res: express.Response) => {
-    res.status(200)
-        .send('Hello, welcome to the server!')
-})
+app.use(express.json())
+const PORT = 3000
 
-app.listen(port, () => {
-    console.log(`Listening on port ${port}... `)
+app.listen(PORT, () => {
+    console.log(`Listening on PORT ${PORT}... `)
 })
