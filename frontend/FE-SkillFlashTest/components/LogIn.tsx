@@ -13,20 +13,16 @@ export default function LogIn({ navigation }) {
   const [password, setPassword] = React.useState("");
   console.log(username);
   async function checkUserExists() {
-    const body = { username, password };
-    try {
-      const response = await axios.post("localhost:9090/signup", body);
-      console.log(response);
-      //get user info from api
-      //no error? navigate to home page + user ID
-      if (response) {
+    const body = { username, password, email: "ana@example.com" };
+    return axios
+      .post("http://localhost:9090/signup", body)
+      .then(({ data }) => {
+        console.log(data, "passed");
         navigation.navigate("HomePage");
-      } else {
-        console.log("username does not exist");
-      }
-    } catch {
-      console.log("error");
-    }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
   return (
     <SafeAreaView style={styles.logInContainer}>
@@ -62,7 +58,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 50,
     color: "black",
-    marginTop: 200,
+    marginTop: 100,
     marginBottom: 20,
     alignSelf: "center",
   },
