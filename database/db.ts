@@ -1,4 +1,6 @@
 import { MongoClient, Collection, ObjectId } from 'mongodb';
+import * as dotenv from 'dotenv'
+dotenv.config()
 
 export interface User {
     _id?: ObjectId;
@@ -7,8 +9,8 @@ export interface User {
     password: string;
 }
 
-const uri = 'mongodb://localhost:27017';
-const db = 'USERS'
+const uri: any = process.env.URI;
+const db = 'skillflash'
 const client = new MongoClient(uri);
 let usersCollection: Collection<User>
 
