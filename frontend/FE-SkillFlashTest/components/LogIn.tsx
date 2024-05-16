@@ -7,7 +7,7 @@ import {
   Pressable,
 } from "react-native";
 
-export default function LogIn() {
+export default function LogIn({ navigation }) {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
 
@@ -16,6 +16,7 @@ export default function LogIn() {
     try {
       //get user info from api
       //no error? navigate to home page + user ID
+      navigation.navigate("HomePage");
     } catch {}
   }
   return (
@@ -47,6 +48,7 @@ const styles = StyleSheet.create({
   logInContainer: {
     flex: 1,
     paddingTop: 58,
+    alignSelf: "center",
   },
   title: {
     fontSize: 50,
