@@ -1,5 +1,5 @@
 import express from 'express'
-import { app } from './app.ts'
+import { app } from './app'
 
 app.use(express.json())
 const PORT = 3000
