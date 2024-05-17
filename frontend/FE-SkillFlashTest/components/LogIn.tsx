@@ -8,14 +8,14 @@ import {
   Pressable,
 } from "react-native";
 
-export default function LogIn({ navigation }) {
+export default function LogIn({ navigation }): React.JSX.Element {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   console.log(username);
   async function checkUserExists() {
     const body = { username, password, email: "ana@example.com" };
     return axios
-      .post("http://localhost:9090/signup", body)
+      .post("http://192.168.0.168:9090/signup", body)
       .then(({ data }) => {
         console.log(data, "passed");
         navigation.navigate("HomePage");
