@@ -1,16 +1,19 @@
 import bcrypt from 'bcrypt'
 import express from 'express'
-import { usersCollection } from '../../database/db'
+import { collection } from '../../database/seeds/seed'
+import { connectDB } from '../../database/connection'
 const app = express()
 app.use(express.json())
 
 export const signUp = async (req: express.Request, res: express.Response) => {
+    
     console.log(req.body)
     const user = req.body
     const hash = await bcrypt.hash(user.password, 10)
     user.password = hash
     try {
-        const result = await usersCollection.insertOne(user)
+        await connectDB()
+        const result = await collection.insertOne(user)
         res.status(201)
             .send({ ...user, _id: result.insertedId })
     } catch (error) {
@@ -18,13 +21,14 @@ export const signUp = async (req: express.Request, res: express.Response) => {
         res.status(500)
             .send(error)
     }
-    console.log('Array of existing users: ', await usersCollection.find().toArray())
+    console.log('Array of existing users: ', await collection.find().toArray())
 }
 
 export const logIn = async (req: express.Request, res: express.Response) => {
+    await connectDB()
     const { username, password } = req.body
     console.log(req.body)
-    const user = await usersCollection.findOne({ username })
+    const user = await collection.findOne({ username })
     if (!user) {
         res.status(404)
             .send('No user with that username found')

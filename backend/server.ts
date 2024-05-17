@@ -1,6 +1,6 @@
 import express from "express";
 import { app } from "./app";
-import { connect } from "../database/db";
+import { connectDB } from "../database/connection";
 
 app.use(express.json());
 const PORT = 9090;
@@ -8,4 +8,4 @@ const PORT = 9090;
 app.listen(PORT, () => {
   console.log(`Listening on PORT ${PORT}... `);
 });
-connect();
+connectDB();
